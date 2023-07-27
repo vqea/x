@@ -8,9 +8,11 @@ bot = commands.Bot(command_prefix="$", intents=discord.Intents.all())
 @bot.event
 async def on_ready():
     print(f"connected to {bot.user.name}")
+    await bot.change_presence(activity=discord.Streaming(name="exchanges", url="https://twitch.tv/x"))
     
     
 @bot.command()
+@commands.is_owner()
 async def rates(ctx):
     x = ctx.guild.name
     y = ctx.guild.icon.url
@@ -19,6 +21,7 @@ async def rates(ctx):
     pp = "<:paypal:1134123735499161694>"
     cr = "<:crypto:1134123606209724477>"
     emb = discord.Embed(
+        color=0xffffff
         title="exchange rates",
         description=f"""_ _
 {ca} <-> {pp}
@@ -45,11 +48,24 @@ _3% fee, $1 min_
 
 
 @bot.command()
+@commands.is_owner()
 async def update(ctx, amount: int=None):
     c = bot.get_channel(1134106690342621234)
     old = c.name
     new = int(old) + amount
     c.edit(name=new)
-    e = discord.embed(color=0xffffff, description="updated total amount exchanged to `${new}`")
-    
+    ctx.message.add_reaction("<:check:1134161196359106600>")
+
+
+@bot.command()
+@commands.is_owner()
+async def role(ctx, mbr: discord.Member):
+    role = ctx.guild.get_role(1134133770333733017)
+    mbr.add_roles(role)
+    ctx.message.add_reaction("<:check:1134161196359106600>")
+
+
+@bot.command()
+
+
 bot.run("MTEzMzUxMTI2MTA5MTU0MTAwMg.GRje1C.vO-U0tj2-NBGmflWc6W7gEjZuqkuOKoeLy9Yr0")

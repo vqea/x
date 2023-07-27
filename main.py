@@ -47,6 +47,7 @@ _3% fee, $1 min_
     await ctx.send(embed=emb)
 
 
+
 @bot.command()
 @commands.is_owner()
 async def update(ctx, amount: int=None):

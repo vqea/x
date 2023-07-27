@@ -42,6 +42,14 @@ _3% fee, $1 min_
     emb.set_thumbnail(url=y)
     await ctx.message.delete()
     await ctx.send(embed=emb)
-    
+
+
+@bot.command()
+async def update(ctx, amount: int=None):
+    c = bot.get_channel(1134106690342621234)
+    old = c.name
+    new = int(old) + amount
+    c.edit(name=new)
+    e = discord.embed(color=0xffffff, description="updated total amount exchanged to `${new}`")
     
 bot.run("MTEzMzUxMTI2MTA5MTU0MTAwMg.GRje1C.vO-U0tj2-NBGmflWc6W7gEjZuqkuOKoeLy9Yr0")
